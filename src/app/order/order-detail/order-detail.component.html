@@ -1,0 +1,33 @@
+<div id="component">
+    <span class="h4">{{pageTitle}}</span>
+    <span> | </span>
+    <a routerLink="/orders/list">Back to list</a>
+    <table *ngIf="order" class="table table-sm">
+        <tr>
+            <th>Id</th>
+            <td><input [(ngModel)]="order.id" type="text" size="5" disabled></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><input [(ngModel)]="order.description" type="text" size="25"></td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td><input [(ngModel)]="order.total" type="number" disabled></td>
+        </tr>
+        <tr>
+            <th>Customer</th>
+            <td>
+                <select [(ngModel)]="order.customerId">
+                    <option *ngFor="let c of customers" value="{{c.id}}" disabled>{{c.name}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <button (click)="verify()" class="btn btn-danger">Delete</button>
+        </tr>
+        <tr>
+            <button *ngIf="showDelete" (click)="delete()" class="btn btn-danger">Verify</button>
+        </tr>
+    </table>
+</div>

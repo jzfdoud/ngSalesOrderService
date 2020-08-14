@@ -1,0 +1,25 @@
+<app-menu></app-menu>
+<div id="component">
+    <h3>Item List</h3>
+    <a routerLink="/item/create">New Item</a>
+    <span>  |  </span>
+    <input [(ngModel)]="searchCriteria" type="text" placeholder="Search">
+    <table class="table table-sm">
+        <tr>
+            <th><a (click)="sort('id')" class="clickable">Id</a></th>
+            <th><a (click)="sort('name')" class="clickable">Name</a></th>
+            <th><a (click)="sort('upc')" class="clickable">UPC</a></th>
+            <th><a (click)="sort('price')" class="clickable">Price</a></th>
+        </tr>
+        <tr *ngFor='let i of items | itemSearch:searchCriteria | sort:sortCriteria:sortAsc'>
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.upc}}</td>
+            <td>{{i.price | currency}}</td>
+            <td>
+                <a routerLink="/item/detail/{{i.id}}">Detail</a>  |  
+                <a routerLink="/item/edit/{{i.id}}">Edit</a>
+            </td>
+        </tr>
+    </table>
+</div>

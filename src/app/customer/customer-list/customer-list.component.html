@@ -1,0 +1,28 @@
+<app-menu></app-menu>
+<div id="component">
+    <h3>Customer List</h3>
+    <a routerLink="/customer/create">New Customer</a> 
+    <span>  |  </span>
+    <input [(ngModel)]="searchCriteria" type="text" placeholder="Search">
+    <table class="table table-sm">
+        <tr>
+            <th><a (click)="sort('id')" class="clickable">Id</a></th>
+            <th><a (click)="sort('name')" class="clickable">Name</a></th>
+            <th><a (click)="sort('state')" class="clickable">State</a></th>
+            <th><a (click)="sort('sales')" class="clickable">Sales</a></th>
+            <th><a (click)="sort('active')" class="clickable">Active</a></th>
+        </tr>
+        <tr *ngFor='let c of customers | customerSearch:searchCriteria | sort:sortCriteria:sortAsc'>
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>{{c.state}}</td>
+            <td>{{c.sales | currency}}</td>
+            <!-- <td>{{c.active | bool:'fr'}}</td> -->
+            <td>{{c.active ? "Yes" : "No"}}</td>
+            <td>
+                <a routerLink="/customer/detail/{{c.id}}">Detail</a>  |  
+                <a routerLink="/customer/edit/{{c.id}}">Edit</a>
+            </td>
+        </tr>
+    </table>
+</div>
